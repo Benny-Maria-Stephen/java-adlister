@@ -1,5 +1,6 @@
 package com.codeup.adlister.models;
 // Stephen's test
+//Maria's TEST
 
 public class Ad {
     private long id;
