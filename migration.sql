@@ -33,5 +33,5 @@ CREATE TABLE IF NOT EXISTS ads_categories(
   ad_id INT UNSIGNED,
   category_id INT UNSIGNED,
   FOREIGN KEY(ad_id) REFERENCES ads(id),
-  FOREIGN KEY(category_id) REFERENCES category(id)
+  FOREIGN KEY(category_id) REFERENCES categories(id)
 );
