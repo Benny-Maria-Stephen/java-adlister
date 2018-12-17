@@ -20,3 +20,16 @@ CREATE TABLE ads (
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS categories(
+  id INT UNSIGNED AUTO_INCREMENT,
+  category VARCHAR(200),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS ads_categories(
+  ad_id INT UNSIGNED,
+  category_id INT UNSIGNED,
+  FOREIGN KEY(ad_id) REFERENCES ads(id),
+  FOREIGN KEY(category_id) REFERENCES category(id)
+);
