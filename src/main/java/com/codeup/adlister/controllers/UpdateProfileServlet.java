@@ -11,11 +11,11 @@ import java.io.IOException;
 @WebServlet(name = "controllers.UpdateProfileServlet", urlPatterns = "/update-profile")
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-//        String email = request.getParameter("email");
-//        String password = request.getParameter("password");
-////        String passwordConfirmation = request.getParameter("confirm_password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String passwordConfirmation = request.getParameter("confirm_password");
 //
-//        request.getSession();
+        request.getSession();
 //
 //        // validate input
 //        // is email empty, password,
