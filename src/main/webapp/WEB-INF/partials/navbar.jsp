@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -7,7 +7,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
-            <li><a href="/aboutus">About</a></li>
+            <li><a href="/aboutUs">About</a></li>
             <li><a href="/ads">All Ads</a></li>
 
             <c:choose>
@@ -17,13 +17,14 @@
                 </c:when>
                 <c:otherwise>
                     <li><a href="/ads/create">Create an ad</a></li>
+                    <li><a href="/update-profile">Edit Profile</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </c:otherwise>
             </c:choose>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div><!-- /.navbar-collapse -->
