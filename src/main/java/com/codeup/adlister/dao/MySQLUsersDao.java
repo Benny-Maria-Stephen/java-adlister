@@ -51,6 +51,22 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Error creating new user", e);
         }
     }
+    public void updateUser (User user) throws SQLException {
+        String sql = "UPDATE users SET email=?, where id=?";
+        PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try {
+            // prepare statement
+            stmt = connection.prepareStatement();
+            //set params
+            stmt.setString(1, user.getEmail());
+            stmt.setLong(3, user.getId());
+            // execute SQL
+            stmt.executeUpdate();
+        }
+        finally {
+            close(stmt);
+        }
+    }
 
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
@@ -63,5 +79,4 @@ public class MySQLUsersDao implements Users {
             rs.getString("password")
         );
     }
-
 }
