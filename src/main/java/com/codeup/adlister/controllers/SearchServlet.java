@@ -16,7 +16,7 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String searchTerm = request.getParameter("searchTerm");
-        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, null);
+        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, searchTerm);
 
         if(adsFound != null){
             request.getSession().setAttribute("ads", adsFound);

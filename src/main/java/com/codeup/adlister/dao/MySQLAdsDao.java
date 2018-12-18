@@ -78,21 +78,23 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
 
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? " +
-                    "|| id = ? " +
-                    "|| id IN (" +
-                        "SELECT ad_id " +
-                        "FROM ads_categories where category_id in (" +
-                            "SELECT id FROM categories WHERE category=?)) || user_id IN (" +
-                    "      SELECT id FROM users" +
-                    "      WHERE username=?" +
-                    "    );");
+//            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? " +
+//                    "|| id = ? " +
+//                    "|| id IN (" +
+//                        "SELECT ad_id " +
+//                        "FROM ads_categories where category_id in (" +
+//                            "SELECT id FROM categories WHERE category=?)) || user_id IN (" +
+//                    "      SELECT id FROM users" +
+//                    "      WHERE username=?" +
+//                    "    );");
+
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? ");
             System.out.println(adId);
             String searchTermWithWildcards = "%" + title + "%";
             stmt.setString(1, searchTermWithWildcards);
-            stmt.setLong(2, adId);
-            stmt.setString(3, category);
-            stmt.setString(4, username);
+//            stmt.setLong(2, adId);
+//            stmt.setString(2, category);
+            stmt.setString(2, username);
 
 
             ResultSet rs = stmt.executeQuery();
