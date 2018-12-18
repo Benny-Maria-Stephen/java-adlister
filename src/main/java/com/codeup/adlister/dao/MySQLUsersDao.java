@@ -22,7 +22,6 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-
     @Override
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
@@ -51,20 +50,21 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Error creating new user", e);
         }
     }
-    public void updateUser (User user) throws SQLException {
-        String sql = "UPDATE users SET email=?, where id=?";
-        PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+    @Override
+    public void updateUser(User user) {
+        String sql = "UPDATE `users` SET `username`=?, `email`= ? where `id`=?";
         try {
             // prepare statement
-            stmt = connection.prepareStatement();
+            PreparedStatement stmt = connection.prepareStatement(sql);
             //set params
-            stmt.setString(1, user.getEmail());
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
             stmt.setLong(3, user.getId());
             // execute SQL
             stmt.executeUpdate();
-        }
-        finally {
-            close(stmt);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
