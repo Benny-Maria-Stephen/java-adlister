@@ -16,12 +16,14 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getAttribute("ad");
+//        String searchTerm = request.getParameter("")
         request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String searchTerm = request.getParameter("title");
+//        Long adId = request.getParameter("id")
 //        Integer searchOption = request.getParameter("searchOption");
 
         List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, null);
@@ -35,6 +37,7 @@ public class SearchServlet extends HttpServlet {
 //            case 3:
 //                break;
 //        }
+
 
     }
 }
