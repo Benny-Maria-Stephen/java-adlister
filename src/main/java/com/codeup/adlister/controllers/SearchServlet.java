@@ -22,6 +22,19 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String searchTerm = request.getParameter("title");
+//        Integer searchOption = request.getParameter("searchOption");
+
+        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, null);
+
+//        switch (searchOption){
+//            case 1:
+//
+//                break;
+//            case 2:
+//                break;
+//            case 3:
+//                break;
+//        }
 
     }
 }
