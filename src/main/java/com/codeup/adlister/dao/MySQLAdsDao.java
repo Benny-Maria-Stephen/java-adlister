@@ -87,6 +87,7 @@ public class MySQLAdsDao implements Ads {
                     "      SELECT id FROM users" +
                     "      WHERE username=?" +
                     "    );");
+            System.out.println(adId);
             String searchTermWithWildcards = "%" + title + "%";
             stmt.setString(1, searchTermWithWildcards);
             stmt.setLong(2, adId);
