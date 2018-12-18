@@ -103,9 +103,9 @@ public class MySQLAdsDao implements Ads {
                 Ad ad = new Ad(id, userId, adTitle, description);
                 ads.add(ad);
             }
+            return ads;
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
-        return ads;
     }
 }
