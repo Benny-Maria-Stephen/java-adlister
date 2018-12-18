@@ -56,13 +56,17 @@ public class MySQLUsersDao implements Users {
         String sql = "UPDATE `users` SET `username`=?, `email`= ? where `id`=?";
         try {
             // prepare statement
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            System.out.println(user.getUsername());
             //set params
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
             stmt.setLong(3, user.getId());
             // execute SQL
             stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            System.out.println("Update success!" + user.getUsername() + " " + user.getPassword() + " " + user.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
