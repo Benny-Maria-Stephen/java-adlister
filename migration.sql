@@ -13,8 +13,6 @@ CREATE TABLE users (
     PRIMARY KEY (id)
 );
 
-SELECT * FROM users;
-
 CREATE TABLE ads (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
@@ -25,15 +23,11 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
-SELECT * FROM ads;
-
 CREATE TABLE IF NOT EXISTS categories(
   id INT UNSIGNED AUTO_INCREMENT,
   category VARCHAR(200),
   PRIMARY KEY (id)
 );
-
-SELECT * FROM categories;
 
 CREATE TABLE IF NOT EXISTS ads_categories(
   ad_id INT UNSIGNED,
@@ -41,4 +35,3 @@ CREATE TABLE IF NOT EXISTS ads_categories(
   FOREIGN KEY(ad_id) REFERENCES ads(id),
   FOREIGN KEY(category_id) REFERENCES categories(id)
 );
-
