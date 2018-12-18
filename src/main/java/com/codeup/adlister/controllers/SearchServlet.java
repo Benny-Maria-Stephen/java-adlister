@@ -20,35 +20,8 @@ public class SearchServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String searchTerm = request.getParameter("searchTerm");
 
-        String title = request.getParameter("title");
-//        String cat = request.getParameter("category");
+        String searchTerm = request.getParameter("title");
 
-
-//        List<Ad> adsFound= DaoFactory.getAdsDao().search(title);
-//        request.setAttribute("ads");
-
-//        response.sendRedirect("/search?ad=" + );
     }
 }
-
-
-//@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/ads")
-//public class AdsIndexServlet extends HttpServlet {
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-//        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
-//    }
-//}
-
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        User user = (User) request.getSession().getAttribute("user");
-//        Ad ad = new Ad(
-//                user.getId(),
-//                request.getParameter("title"),
-//                request.getParameter("description")
-//        );
-//        DaoFactory.getAdsDao().insert(ad);
-//        response.sendRedirect("/ads");
-//    }
