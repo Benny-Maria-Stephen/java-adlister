@@ -6,28 +6,20 @@
             <a class="navbar-brand" href="/ads">Adlister</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li><a href="/aboutus">About</a></li>
+            <li><a href="/ads">All Ads</a></li>
 
             <c:choose>
                 <c:when test="${sessionScope.user.getUsername() == null}">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/aboutus">About</a></li>
-                    <li><a href="/ads">All Ads</a></li>
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/aboutus">About</a></li>
-                    <li><a href="/ads">All Ads</a></li>
                     <li><a href="/ads/create">Create an ad</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </c:otherwise>
             </c:choose>
-
-
-
-
-            <%--<li>Hi, <%=username %>  (<a href="/logout">Logout</a>)</li>--%>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
