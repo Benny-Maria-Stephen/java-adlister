@@ -12,6 +12,16 @@
 <div class="container">
     <h1>Here Are all the ads!</h1>
 
+    <form action="search" method="post">
+        Enter title or description:
+        <br>
+        <input type="text" name="title">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
             <h2><c:out value="${ad.title}"/></h2>

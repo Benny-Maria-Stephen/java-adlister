@@ -72,4 +72,54 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public List<Ad> search(String searchTerm) {
+        PreparedStatement stmt = null;
+        List<Ad> ads = new ArrayList<>();
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ?");
+            String searchTermWithWildcards = "%" + searchTerm + "%";
+            stmt.setString(1, searchTermWithWildcards);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                Long userId = rs.getLong("user_id");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                Ad ad = new Ad(id, userId, title, description);
+                ads.add(ad);
+//                createAdsFromResults(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+        return ads;
+    }
+
+//    public Long search(String searchTerm) {
+//        PreparedStatement stmt = null;
+//        List<Ad> ads = new ArrayList<>();
+//
+//        try {
+//            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ?");
+//            String searchTermWithWildcards = "%" + searchTerm + "%";
+//            stmt.setString(1, searchTermWithWildcards);
+//
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                Long id = rs.getLong("id");
+//                Long userId = rs.getLong("user_id");
+//                String title = rs.getString("title");
+//                String description = rs.getString("description");
+//                Ad ad = new Ad(id, userId, title, description);
+//                ads.add(ad);
+////                createAdsFromResults(rs);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving all ads.", e);
+//        }
+//        return ads;
+//    }
 }
