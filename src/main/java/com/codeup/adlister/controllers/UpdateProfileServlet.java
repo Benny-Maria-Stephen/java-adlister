@@ -15,7 +15,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String password = request.getParameter("password");
 //        String passwordConfirmation = request.getParameter("confirm_password");
 
-        request.getSession()
+        request.getSession();
 
         // validate input
         // is email empty, password,
