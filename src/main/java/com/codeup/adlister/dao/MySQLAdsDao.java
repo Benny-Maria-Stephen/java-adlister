@@ -73,39 +73,44 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-    public List<Ad> search(String title, Long adId, String category, String username) {
+    public List<Ad> search(String searchTerm) {
         PreparedStatement stmt = null;
         List<Ad> ads = new ArrayList<>();
 
         try {
-//            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? " +
-//                    "|| id = ? " +
-//                    "|| id IN (" +
-//                        "SELECT ad_id " +
-//                        "FROM ads_categories where category_id in (" +
-//                            "SELECT id FROM categories WHERE category=?)) || user_id IN (" +
-//                    "      SELECT id FROM users" +
-//                    "      WHERE username=?" +
-//                    "    );");
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? ||" +
+                    "id IN (" +
+                        "SELECT ad_id " +
+                        "FROM ads_categories where category_id in (" +
+                            "SELECT id FROM categories WHERE category=?)) || user_id IN (" +
+                    "      SELECT id FROM users" +
+                    "      WHERE username=?" +
+                    "    );");
 
-            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ? ");
-            System.out.println(adId);
-            String searchTermWithWildcards = "%" + title + "%";
+            String searchTermWithWildcards = "%" + searchTerm + "%";
             stmt.setString(1, searchTermWithWildcards);
-//            stmt.setLong(2, adId);
-//            stmt.setString(2, category);
-            stmt.setString(2, username);
-
+            stmt.setString(2, searchTerm);
+            stmt.setString(3, searchTerm);
+//
 
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Long id = rs.getLong("id");
-                Long userId = rs.getLong("user_id");
-                String adTitle = rs.getString("title");
-                String description = rs.getString("description");
-                Ad ad = new Ad(id, userId, adTitle, description);
-                ads.add(ad);
-            }
+            ads = createAdsFromResults(rs);
+            return ads;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    public List<Ad> search(long adId) {
+        PreparedStatement stmt = null;
+        List<Ad> ads = new ArrayList<>();
+
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ?");
+            stmt.setLong(1, adId);
+
+            ResultSet rs = stmt.executeQuery();
+            ads = createAdsFromResults(rs);
             return ads;
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
