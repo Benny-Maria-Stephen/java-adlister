@@ -51,24 +51,24 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-    public Long deleteUser(User user){
-            String query = "DELETE * FROM users WHERE username=?, email=?, password=?";
-        try {
-            // prepare statement
-            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            //set params
-            stmt.setLong(1, user.getId());
-            stmt.execute(query);
-
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            deleteUser(user);
-            System.out.println("Goodbye!");
-            return rs.getLong(1);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error deleting user", e);
-        }
-    }
+//    public Long deleteUser(User user){
+//            String query = "DELETE FROM users WHERE id = ?";
+//        try {
+//            // prepare statement
+//            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//            //set params
+//            stmt.setLong(1, user.getId());
+//            stmt.execute(query);
+//
+//            ResultSet rs = stmt.getGeneratedKeys();
+//            rs.next();
+//            deleteUser(user);
+//            System.out.println("Goodbye!");
+//            return rs.getLong(1);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error deleting user", e);
+//        }
+//    }
 
     @Override
     public void updateUser(User user) {
@@ -88,6 +88,25 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Error updating profile", e);
         }
     }
+
+    public void deleteUser( User user ) {
+        String query = "DELETE FROM users WHERE id = ?";
+        try {
+            // prepare statement
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            //set params
+            stmt.setLong(1, user.getId());
+            stmt.execute(query);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            deleteUser(user);
+            System.out.println("Goodbye!");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user", e);
+        }
+    }
+
 
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
