@@ -33,8 +33,28 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
+    public Long insertCategory(String category) {
+        return null;
+    }
+
+    @Override
+    public List<Long> catIds(List<String> categories) {
+        return null;
+    }
+
+    @Override
     public List<Ad> search(long adId) {
         return null;
+    }
+
+    public Long insert(String category) {
+        return null;
+    }
+
+    public List<Long> catAdded(List<String> categories) {
+        List<Long> u = new ArrayList<>();
+        u.add(-1L);
+        return u;
     }
 
     private List<Ad> generateAds() {
@@ -65,4 +85,7 @@ public class ListAdsDao implements Ads {
         ));
         return ads;
     }
+
+
+
 }
