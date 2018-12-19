@@ -42,3 +42,9 @@ CREATE TABLE IF NOT EXISTS ads_categories(
   FOREIGN KEY(ad_id) REFERENCES ads(id),
   FOREIGN KEY(category_id) REFERENCES categories(id)
 );
+
+use adlister_db;
+
+select * from categories;
+select * from ads;
+select * from ads_categories;
