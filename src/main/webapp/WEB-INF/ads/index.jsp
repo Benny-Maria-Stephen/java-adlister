@@ -17,6 +17,9 @@
             <h2><<a href="/search?adId=${ad.id}"></a><c:out value="${ad.title}"/></h2>
             <p><c:out value="${ad.description}"/></p>
             <p>Posted by: <c:out value="${ad.userId}"/></p>
+            <c:forEach var="category" items="${ad.getCategories()}">
+                <p>${category}</p>
+            </c:forEach>
         </div>
     </c:forEach>
 </div>

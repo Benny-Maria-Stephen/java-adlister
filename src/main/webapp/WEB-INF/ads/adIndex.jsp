@@ -17,6 +17,9 @@
 <h2><c:out value="${ad.title}"/></h2>
 <p><c:out value="${ad.description}"/></p>
 <p>Posted by: <c:out value="${poster}"/></p>
+<%--<c: forEach var="category" items="${ad.getCategories()}">--%>
+    <%--<p><c:out value="${category}"/></p>--%>
+<%--</c:>--%>
 
 </body>
 </html>
