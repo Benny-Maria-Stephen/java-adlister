@@ -10,28 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteUserServlet", urlPatterns = "/update-profile")
+@WebServlet(name = "DeleteUserServlet", urlPatterns = "/delete-profile")
 public class DeleteUserServlet extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-//        String id = request.getParameter("id");
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String passwordConfirmation = request.getParameter("confirm_password");
+////        String id = request.getParameter("id");
+//        String username = request.getParameter("username");
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//        String passwordConfirmation = request.getParameter("confirm_password");
         User user = (User) request.getSession().getAttribute("user");
-        request.getSession();
 
-        boolean inputHasErrors = username.isEmpty()
-                || email.isEmpty()
-                || password.isEmpty()
-                || (!password.equals(passwordConfirmation));
-        if (inputHasErrors) {
-            response.sendRedirect("/update-profile");
-            return;
+        if(request.getParameter("delete") != null){
+            DaoFactory.getUsersDao().deleteUser(user);
         }
-        // delete profile
-        DaoFactory.getUsersDao().deleteUser(user.getId());
-        response.sendRedirect("/login");
+//        request.getSession().setAttribute("user", null);
+
+
+        response.sendRedirect("/logout");
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {

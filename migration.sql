@@ -48,3 +48,4 @@ use adlister_db;
 select * from categories;
 select * from ads;
 select * from ads_categories;
+select * from users;
