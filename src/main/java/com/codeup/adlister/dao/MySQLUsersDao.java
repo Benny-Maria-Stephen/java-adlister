@@ -52,14 +52,18 @@ public class MySQLUsersDao implements Users {
     }
 
     public Long deleteUser(User user){
-            String query = "DELETE FROM users WHERE id = ?";
+            String query = "DELETE * FROM users WHERE username=?, email=?, password=?";
         try {
             // prepare statement
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             //set params
             stmt.setLong(1, user.getId());
+            stmt.execute(query);
+
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
+            deleteUser(user);
+            System.out.println("Goodbye!");
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user", e);

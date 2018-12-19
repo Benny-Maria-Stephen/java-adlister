@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.UpdateProfileServlet", urlPatterns = "/update-profile")
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        String id = request.get("id");
+//        String id = request.getParameter("id");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -36,8 +36,8 @@ public class UpdateProfileServlet extends HttpServlet {
         response.sendRedirect("/profile");
 
         // delete profile
-        DaoFactory.getUsersDao().deleteUser(new User(user.getId(), username, email, password ));
-        response.sendRedirect("/profile");
+        DaoFactory.getUsersDao().deleteUser(user.getId(), username, email, password);
+        response.sendRedirect("/login");
 
     }
 
