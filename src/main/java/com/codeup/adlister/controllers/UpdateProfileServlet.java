@@ -33,6 +33,14 @@ public class UpdateProfileServlet extends HttpServlet {
         // update profile
         DaoFactory.getUsersDao().updateUser(new User(user.getId(), username, email, password));
         response.sendRedirect("/profile");
+<<<<<<< HEAD
+=======
+
+        // delete profile
+//        DaoFactory.getUsersDao().deleteUser(user.getId(), username, email, password);
+//        response.sendRedirect("/login");
+
+>>>>>>> 3c3fd28f58806c550692440d6c34b1aabc77e16d
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
