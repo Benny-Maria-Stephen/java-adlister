@@ -27,11 +27,11 @@
             <label for="confirm_password">Confirm Password</label>
             <input id="confirm_password" name="confirm_password" class="form-control" type="password">
         </div>
-        <input type="submit" class="btn btn-primary btn-block" value="Submit Changes"><br>
+        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit Changes"><br>
         <%--<input type="submit"  class="btn btn-primary btn-block" value="Delete Profile">--%>
     </form>
     <form action="/delete-profile" method="post">
-        <input type="submit" class="btn btn-primary btn-block" value="Delete Profile"><br>
+        <input type="submit" class="btn btn-primary btn-block" name="delete" value="Delete Profile"><br>
     </form>
 </div>
 </body>

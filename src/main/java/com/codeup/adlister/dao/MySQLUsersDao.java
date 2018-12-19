@@ -93,18 +93,19 @@ public class MySQLUsersDao implements Users {
         String query = "DELETE FROM users WHERE id = ?";
         try {
             // prepare statement
-            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = connection.prepareStatement(query);
             //set params
             stmt.setLong(1, user.getId());
-            stmt.execute(query);
+            stmt.execute();
 
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            deleteUser(user);
             System.out.println("Goodbye!");
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user", e);
         }
+    }
+
+    public static void main(String[] args) {
+        DaoFactory.getUsersDao().deleteUser(new User(1, "admin", "admin@gmail.com", "password"));
     }
 
 
