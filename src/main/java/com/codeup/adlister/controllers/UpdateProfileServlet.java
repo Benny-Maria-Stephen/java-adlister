@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.UpdateProfileServlet", urlPatterns = "/update-profile")
 public class UpdateProfileServlet extends HttpServlet {
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+        String id = request.get("id");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -23,15 +24,21 @@ public class UpdateProfileServlet extends HttpServlet {
                 || password.isEmpty()
                 || (!password.equals(passwordConfirmation));
 
+
         //create a boolean to check if a user with that username is in the database using the search function
 //        boolean usernameExists =
         if (inputHasErrors) {
             response.sendRedirect("/update-profile");
             return;
         }
-
+        // update profile
         DaoFactory.getUsersDao().updateUser(new User(user.getId(), username, email, password));
         response.sendRedirect("/profile");
+
+        // delete profile
+        DaoFactory.getUsersDao().deleteUser(new User(user.getId(), username, email, password ));
+        response.sendRedirect("/profile");
+
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {

@@ -51,6 +51,21 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public Long deleteUser(User user){
+            String query = "DELETE FROM users WHERE id = ?";
+        try {
+            // prepare statement
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            //set params
+            stmt.setLong(1, user.getId());
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user", e);
+        }
+    }
+
     @Override
     public void updateUser(User user) {
         String sql = "UPDATE `users` SET `username`=?, `email`= ? where `id`=?";
@@ -66,7 +81,7 @@ public class MySQLUsersDao implements Users {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error updating profile", e);
         }
     }
 

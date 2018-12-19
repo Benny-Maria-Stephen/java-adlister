@@ -10,5 +10,6 @@ public interface Users {
     User findByUsername(String username);
     Long insert(User user);
     void updateUser(User user);
+    Long deleteUser(User user);
 
 }
