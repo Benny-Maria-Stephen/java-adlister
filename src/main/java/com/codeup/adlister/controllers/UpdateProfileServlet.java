@@ -15,37 +15,26 @@ public class UpdateProfileServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
-        Long id = (Long)request.getSession().getAttribute("id");
-//
+        User user = (User) request.getSession().getAttribute("user");
         request.getSession();
-//
-//        // validate input
-//        // is email empty, password,
+
         boolean inputHasErrors = username.isEmpty()
                 || email.isEmpty()
                 || password.isEmpty()
-                || (! password.equals(passwordConfirmation));
+                || (!password.equals(passwordConfirmation));
 
+        //create a boolean to check if a user with that username is in the database using the search function
+//        boolean usernameExists =
         if (inputHasErrors) {
             response.sendRedirect("/update-profile");
             return;
         }
-        //        // create and save a new user
-        User user = new User(id, username, email, password);
-        DaoFactory.getUsersDao().updateUser(user);
-        response.sendRedirect("/");
-//
-//        request.getRequestDispatcher("/WEB-INF/partials/profile.jsp").forward(request, response);
+
+        DaoFactory.getUsersDao().updateUser(new User(user.getId(), username, email, password));
+        response.sendRedirect("/profile");
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/updateProfile.jsp").forward(request, response);
-//        if (inputHasErrors) {
-//            response.sendRedirect("/WEB-INF/updateProfile.jsp");
-//            return;
-//        }
-//
-
-
     }
 }

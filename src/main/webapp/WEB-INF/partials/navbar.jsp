@@ -9,19 +9,17 @@
             <li><a href="/">Home</a></li>
             <li><a href="/aboutUs">About</a></li>
             <li><a href="/ads">All Ads</a></li>
-
             <c:choose>
                 <c:when test="${sessionScope.user.getUsername() == null}">
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/ads/create">Create an ad</a></li>
+                    <li><a href="/ads/create">Create Ad</a></li>
                     <li><a href="/update-profile">Edit Profile</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </c:otherwise>
             </c:choose>
-
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
             <input class="form-control mr-sm-2" id="searchTerm" type="text" placeholder="Search" aria-label="Search">

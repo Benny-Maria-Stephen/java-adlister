@@ -57,7 +57,6 @@ public class MySQLUsersDao implements Users {
         try {
             // prepare statement
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            System.out.println(user.getUsername());
             //set params
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
@@ -66,7 +65,6 @@ public class MySQLUsersDao implements Users {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            System.out.println("Update success!" + user.getUsername() + " " + user.getPassword() + " " + user.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
