@@ -37,8 +37,8 @@ public class UpdateProfileServlet extends HttpServlet {
 =======
 
         // delete profile
-//        DaoFactory.getUsersDao().deleteUser(user.getId(), username, email, password);
-//        response.sendRedirect("/login");
+        DaoFactory.getUsersDao().deleteUser(user.getId(), username, email, password);
+        response.sendRedirect("/login");
 
 >>>>>>> 3c3fd28f58806c550692440d6c34b1aabc77e16d
     }
