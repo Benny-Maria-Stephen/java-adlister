@@ -2,11 +2,14 @@ package com.codeup.adlister.models;
 // Stephen's test
 //Maria's TEST
 
+import java.util.List;
+
 public class Ad {
     private long id;
     private long userId;
     private String title;
     private String description;
+    private List<String> categories;
 
     public Ad(long id, long userId, String title, String description) {
         this.id = id;
@@ -15,10 +18,11 @@ public class Ad {
         this.description = description;
     }
 
-    public Ad(long userId, String title, String description) {
+    public Ad(long userId, String title, String description, List<String> categories) {
         this.userId = userId;
         this.title = title;
         this.description = description;
+        this.categories = categories;
     }
 
     public long getId() {
@@ -51,5 +55,9 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getCategories() {
+        return categories;
     }
 }

@@ -15,28 +15,36 @@ import java.util.List;
 @WebServlet(name = "controllers.SearchServlet", urlPatterns = "/search")
 public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getAttribute("ad");
-//        String searchTerm = request.getParameter("")
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        String searchTerm = request.getParameter("searchTerm");
+        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, searchTerm);
+
+        if(adsFound != null){
+            request.getSession().setAttribute("ads", adsFound);
+
+            request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        } else{
+            adsFound = DaoFactory.getAdsDao().all();
+            request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String searchTerm = request.getParameter("title");
-//        Long adId = request.getParameter("id")
-//        Integer searchOption = request.getParameter("searchOption");
-
-        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, null);
-
-//        switch (searchOption){
-//            case 1:
+//        String searchTerm = request.getParameter("title");
+////        Long adId = request.getParameter("id")
+////        Integer searchOption = request.getParameter("searchOption");
 //
-//                break;
-//            case 2:
-//                break;
-//            case 3:
-//                break;
-//        }
+////        List<Ad> adsFound = DaoFactory.getAdsDao().search(searchTerm, null, searchTerm, null);
+//
+////        switch (searchOption){
+////            case 1:
+////
+////                break;
+////            case 2:
+////                break;
+////            case 3:
+////                break;
+////        }
 
 
     }
