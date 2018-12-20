@@ -43,7 +43,7 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public List<Ad> search(long adId) {
+    public Ad search(long adId) {
         return null;
     }
 

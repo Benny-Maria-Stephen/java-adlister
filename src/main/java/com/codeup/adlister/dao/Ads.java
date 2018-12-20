@@ -17,6 +17,6 @@ public interface Ads {
 
     List<Long> catIds(List<String> categories);
 
-    List<Ad> search(long adId);
+    Ad search(long adId);
 
 }

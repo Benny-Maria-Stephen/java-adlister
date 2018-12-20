@@ -192,19 +192,42 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    public List<Ad> search(long adId) {
+    public Ad search(long adId) {
         PreparedStatement stmt = null;
-        List<Ad> ads = new ArrayList<>();
+        Ad ad;
 
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ?");
             stmt.setLong(1, adId);
 
             ResultSet rs = stmt.executeQuery();
-            ads = createAdsFromResults(rs);
-            return ads;
+            rs.next();
+            long id = rs.getLong("id");
+            long userId = rs.getLong("user_id");
+            String title = rs.getString("title");
+            String description = rs.getString("description");
+            List<String> categories = getAdCategories(adId);
+
+            ad = new Ad(id, userId, title, description, categories);
+            return ad;
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
+    }
+
+    private List<String> getAdCategories(long adId){
+        List<String> categories = new ArrayList<>();
+        try {
+            String getCategoryIds = "SELECT category FROM categories WHERE id IN (SELECT category_id FROM ads_categories WHERE ad_id = ?)";
+            PreparedStatement stmt = connection.prepareStatement(getCategoryIds);
+            stmt.setLong(1, adId);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                categories.add(rs.getString("category"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
     }
 }
