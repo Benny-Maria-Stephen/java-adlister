@@ -25,6 +25,13 @@ public class Ad {
         this.categories = categories;
     }
 
+    public Ad(long id, long userId, String title, String description, List<String> categories) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.categories = categories;
+    }
+
     public long getId() {
         return id;
     }

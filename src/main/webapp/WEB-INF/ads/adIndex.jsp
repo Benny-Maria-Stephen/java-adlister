@@ -13,13 +13,14 @@
 </head>
 <body>
 <%--This page is meant to display the information of one ad--%>
+<%--<h2>${title}</h2>--%>
 
-<h2><c:out value="${ad.title}"/></h2>
-<p><c:out value="${ad.description}"/></p>
-<p>Posted by: <c:out value="${poster}"/></p>
-<%--<c: forEach var="category" items="${ad.getCategories()}">--%>
-    <%--<p><c:out value="${category}"/></p>--%>
-<%--</c:>--%>
+<h2><c:out value="${title}"/></h2>
+<p><c:out value="${description}"/></p>
+
+<c:forEach var="c" items="${categories}">
+    <p><c:out value="${c}"/></p>
+</c:forEach>
 
 </body>
 </html>
