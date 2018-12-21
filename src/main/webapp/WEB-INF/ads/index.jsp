@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <h2><a href="/view-ad?adId=${ad.id}"><c:out value="${ad.title}"/></a></h2>
             <p><c:out value="${ad.description}"/></p>
-            <p>Posted by: <c:out value="${user.username}"/></p>
+            <%--<p>Posted by: <c:out value="${user.username}"/></p>--%>
             <c:forEach var="category" items="${ad.categories}">
                 <p>${category}</p>
             </c:forEach>
