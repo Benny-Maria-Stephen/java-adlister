@@ -9,7 +9,7 @@ import java.io.IOException;
 public class EditAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-        long
+//        long
 
     }
 }
