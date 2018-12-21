@@ -6,6 +6,7 @@ import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -14,37 +15,23 @@ import java.util.List;
 
 @WebServlet(name = "controllers.DeleteAdServlet", urlPatterns = "/ads/delete")
 
-public class DeleteAdsServlet {
+public class DeleteAdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("/login");
-            return;
+        boolean deleted = (boolean) request.getSession().getAttribute("deleted");
+        System.out.println(deleted);
+        if (deleted) {
+            request.getRequestDispatcher("/WEB-INF/ads/deleted.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/ads");
         }
-        request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
-                .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        List<String> categories = new ArrayList<>();
-
-        for(int i = 1; i <= 5 ; i++){
-            String category = request.getParameter("category" + i);
-            if(category == null){
-                break;
-            }
-            categories.add(category);
-        }
-
-
-        Ad ad = new Ad(
-                user.getId(),
-                request.getParameter("title"),
-                request.getParameter("description"),
-                categories
-        );
-
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        long adId = Long.parseLong(request.getParameter("delete"));
+        boolean deleted = DaoFactory.getAdsDao().deleteAd(adId);
+        request.setAttribute("deleted", deleted);
+        System.out.println(deleted);
+        request.getRequestDispatcher("/ads/delete").forward(request, response);
     }
+
 }

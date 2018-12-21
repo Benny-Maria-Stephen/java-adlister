@@ -86,6 +86,8 @@ public class ListAdsDao implements Ads {
         return ads;
     }
 
-
-
+    @Override
+    public boolean deleteAd( long adId ) {
+        return false;
+    }
 }
