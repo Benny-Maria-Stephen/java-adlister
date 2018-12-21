@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="category1">category</label>
-                <input id="category1" name="category"1 class="form-control" type="text">
+                <input id="category1" name="category1" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="category2">category</label>

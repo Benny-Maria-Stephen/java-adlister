@@ -14,6 +14,11 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
+            <c:choose>
+                <c:when test="${deleted}">
+                    <h1>AD SUCCESSFULLY DELETED</h1>
+                </c:when>
+            </c:choose>
             <h2><a href="/view-ad?adId=${ad.id}"><c:out value="${ad.title}"/></a></h2>
             <p><c:out value="${ad.description}"/></p>
             <p>Posted by: <c:out value="${ad.userId}"/></p>

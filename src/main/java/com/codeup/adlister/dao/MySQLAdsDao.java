@@ -70,7 +70,15 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public static void main(String[] args) {
+        List<String> categories = new ArrayList<>();
+        for(int i = 0; i <= 30; i++){
+            categories.add("cat" + i);
+        }
 
+        Long idInserted = DaoFactory.getAdsDao().insert(new Ad(2, "testing again", "description again", categories));
+        System.out.println(idInserted);
+    }
 
     public List<Long> catIds(List<String> categories){
         //Goes through the list of category names and returns the category id if it exists or
@@ -79,7 +87,7 @@ public class MySQLAdsDao implements Ads {
         for(String category : categories){
             System.out.println(category);
             try {
-                String catQuery = "SELECT id FROM categories WHERE category=?";
+                String catQuery = "SELECT id FROM categories WHERE category=?";//CHECKS IF CATEGORY EXISTS
                 PreparedStatement stmt = connection.prepareStatement(catQuery);
                 stmt.setString(1, category);
 
@@ -89,23 +97,15 @@ public class MySQLAdsDao implements Ads {
                 System.out.println(rs);
 
                 if(rs.next()){//if any results are found
-                    while(rs.next()){
+                    do{
                         ids.add(rs.getLong("id"));
-                    }
+                    } while(rs.next());
                 } else{//if a result is not found
                     //not working because the query comes back later than the program is run
                     System.out.println("This gets executed first");
                     ids.add(insertCategory(category));
                 }
-
             } catch (SQLException e) {
-                try {
-                    System.out.println("first exception thrown");
-                    ids.add(insertCategory(category));
-                } catch (SQLException e1) {
-                    System.out.println("second exception thrown");
-                    e1.printStackTrace();
-                }
                 e.printStackTrace();
             }
         }
@@ -237,9 +237,11 @@ public class MySQLAdsDao implements Ads {
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, adId );
-            return stmt.execute();
+            int rows = stmt.executeUpdate();
+            return (rows > 0);
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting ad.", e);
         }
     }
+
 }
