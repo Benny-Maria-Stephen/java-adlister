@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "controllers.DeleteAdServlet", urlPatterns = "/ads/delete ")
+@WebServlet(name = "controllers.DeleteAdServlet", urlPatterns = "/ads/delete")
 
 public class DeleteAdsServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
