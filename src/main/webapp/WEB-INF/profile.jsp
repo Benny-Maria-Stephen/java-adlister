@@ -10,6 +10,10 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <h2>Here are your ads: </h2>
+        <ul>
+            <li>${sessionScope.ads.title}</li>
+        </ul>
     </div>
 
 </body>

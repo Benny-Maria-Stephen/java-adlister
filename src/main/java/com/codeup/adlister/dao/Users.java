@@ -11,4 +11,5 @@ public interface Users {
     Long insert(User user);
     void updateUser(User user);
     void deleteUser(User user);
+    User findByUserId(Long id);
 }

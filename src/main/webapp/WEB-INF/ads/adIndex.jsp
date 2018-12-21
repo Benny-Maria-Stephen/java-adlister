@@ -21,6 +21,7 @@
 <c:forEach var="c" items="${categories}">
     <p><c:out value="${c}"/></p>
 </c:forEach>
+<p>Posted by: <c:out value="${username}"/></p>
 
 </body>
 </html>

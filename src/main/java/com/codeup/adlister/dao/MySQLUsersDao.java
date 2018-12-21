@@ -34,6 +34,23 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public User findByUserId(Long id) {
+        String query = "SELECT * from users where id in (select user_id from ads where user_id = ?)";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by user id", e);
+        }
+    }
+
+//    public static void main(String[] args) {
+//        User user = DaoFactory.getUsersDao().findByUserId(5L);
+//        System.out.println(user.getUsername());
+//    }
+
+
     @Override
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
@@ -86,9 +103,6 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-    public static void main(String[] args) {
-        DaoFactory.getUsersDao().deleteUser(new User(1, "admin", "admin@gmail.com", "password"));
-    }
 
 
     private User extractUser(ResultSet rs) throws SQLException {
