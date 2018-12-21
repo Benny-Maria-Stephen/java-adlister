@@ -232,15 +232,28 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public boolean deleteAd( long adId ) {
-    String query = "DELETE FROM ads WHERE id = ?";
+    public boolean deleteAd(long adId) {
+        deleteAdsCategories(adId);
+        String deleteAd = "DELETE FROM ads WHERE id = ?";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+            PreparedStatement stmt = connection.prepareStatement(deleteAd);
             stmt.setLong(1, adId );
             int rows = stmt.executeUpdate();
             return (rows > 0);
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting ad.", e);
+        }
+    }
+
+    private boolean deleteAdsCategories(long adId){
+        String deleteRelationship = "DELETE FROM ads_categories WHERE ad_id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(deleteRelationship);
+            stmt.setLong(1, adId);
+            int rows = stmt.executeUpdate();
+            return (rows > 0);
+        } catch(SQLException e){
+            throw new RuntimeException("Error in deleting relationship.", e);
         }
     }
 
