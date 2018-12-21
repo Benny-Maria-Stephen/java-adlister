@@ -49,3 +49,6 @@ select * from categories;
 select * from ads;
 select * from ads_categories;
 select * from users;
+
+delete
+delete from ads where id = 13;
