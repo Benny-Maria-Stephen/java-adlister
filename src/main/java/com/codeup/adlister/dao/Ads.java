@@ -19,4 +19,6 @@ public interface Ads {
 
     Ad search(long adId);
 
+    boolean deleteAd(long adId);
+
 }
