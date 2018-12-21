@@ -231,6 +231,7 @@ public class MySQLAdsDao implements Ads {
         return categories;
     }
 
+    //This function deletes an ad by first deleting the relationship and then deleting the ad
     @Override
     public boolean deleteAd(long adId) {
         deleteAdsCategories(adId);
@@ -245,6 +246,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    //This function deletes ads and categories relationships
     private boolean deleteAdsCategories(long adId){
         String deleteRelationship = "DELETE FROM ads_categories WHERE ad_id = ?";
         try{
