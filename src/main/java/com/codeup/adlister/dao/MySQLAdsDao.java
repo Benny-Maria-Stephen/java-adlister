@@ -191,6 +191,22 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+    public List<Ad> getAdTitles(String adTitle){
+        PreparedStatement stmt = null;
+        List<Ad> titles = new ArrayList<>();
+        try{
+            String getAdTitle = "select * from ads where user_id in (SELECT id from users where id=?)";
+            stmt = connection.prepareStatement(getAdTitle);
+            stmt.setString(1, adTitle);
+
+            ResultSet rs = stmt.executeQuery();
+            titles = createAdsFromResults(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return titles;
+    }
 
     public Ad search(long adId) {
         PreparedStatement stmt = null;

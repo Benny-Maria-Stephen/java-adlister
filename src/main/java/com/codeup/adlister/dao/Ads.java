@@ -16,7 +16,7 @@ public interface Ads {
     Long insertCategory(String category) throws SQLException;
 
     List<Long> catIds(List<String> categories);
-
+    List<Ad> getAdTitles(String adTitle);
     Ad search(long adId);
 
 }
