@@ -201,11 +201,11 @@ public class MySQLAdsDao implements Ads {
 
             ResultSet rs = stmt.executeQuery();
             titles = createAdsFromResults(rs);
+            return titles;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error retrieving all ads.", e);
         }
-        return titles;
     }
 
     public Ad search(long adId) {
