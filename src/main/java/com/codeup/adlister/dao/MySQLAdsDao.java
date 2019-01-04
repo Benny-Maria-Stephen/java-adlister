@@ -246,6 +246,30 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public boolean editAd( long adId ) {
+        return false;
+    }
+
+    @Override
+    public void editAd( Ad ad ) {
+        String sql = "UPDATE `ads` SET `user_id`=?, `title`= ?, `description`=? where `id`=?";
+        try {
+            // prepare statement
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            //set params
+            stmt.setString(1, String.valueOf(ad.getUserId()));
+            stmt.setString(2, ad.getTitle());
+            stmt.setLong(3, Long.parseLong(ad.getDescription()));
+            // execute SQL
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad", e);
+        }
+    }
+
     //This function deletes ads and categories relationships
     private boolean deleteAdsCategories(long adId){
         String deleteRelationship = "DELETE FROM ads_categories WHERE ad_id = ?";

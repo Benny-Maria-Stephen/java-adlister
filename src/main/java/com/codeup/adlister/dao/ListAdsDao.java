@@ -90,4 +90,14 @@ public class ListAdsDao implements Ads {
     public boolean deleteAd( long adId ) {
         return false;
     }
+
+    @Override
+    public boolean editAd( long adId ) {
+        return false;
+    }
+
+    @Override
+    public void editAd( Ad ad ) {
+
+    }
 }
