@@ -1,4 +1,5 @@
 package com.codeup.adlister.controllers;
+import com.codeup.adlister.dao.Ads;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
@@ -15,8 +16,9 @@ import java.io.IOException;
 public class EditAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 
-//            String id = request.getParameter("id");
+            String id = request.getParameter("id");
 //            String username = request.getParameter("username");
+//            Long
 //            String email = request.getParameter("email");
 //            String password = request.getParameter("password");
 //            String passwordConfirmation = request.getParameter("confirm_password");
@@ -37,8 +39,8 @@ public class EditAdServlet extends HttpServlet {
 //            }
 
         // update ad
-        DaoFactory.getAdsDao().editAd(Ad ad);
-        response.sendRedirect("/ads");
+//        DaoFactory.getAdsDao().editAd(ad);
+//        response.sendRedirect("/ads");
 
         //Tells the page to go to the url /ads. Since there is no .jsp at the end we are going through another servlet
         response.sendRedirect("/ads");
