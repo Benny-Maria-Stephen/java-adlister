@@ -2,6 +2,7 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.Config;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 //import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 //import com.codeup.adlister.com.codeup.adlister.Config;
@@ -36,6 +37,19 @@ public class MySQLAdsDao implements Ads {
             stmt = connection.prepareStatement("SELECT * FROM ads");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    public List<Ad> getAdTitles(User user){
+        PreparedStatement stmt = null;
+        try{
+            String getAdTitle = "select * from ads where user_id = " + user.getId();
+            stmt = connection.prepareStatement(getAdTitle);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
@@ -191,22 +205,7 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
-    public List<Ad> getAdTitles(String adTitle){
-        PreparedStatement stmt = null;
-        List<Ad> titles = new ArrayList<>();
-        try{
-            String getAdTitle = "select * from ads where user_id in (SELECT id from users where id=?)";
-            stmt = connection.prepareStatement(getAdTitle);
-            stmt.setString(1, adTitle);
 
-            ResultSet rs = stmt.executeQuery();
-            titles = createAdsFromResults(rs);
-            return titles;
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
-        }
-    }
 
     public Ad search(long adId) {
         PreparedStatement stmt = null;
