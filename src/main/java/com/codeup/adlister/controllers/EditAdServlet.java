@@ -14,6 +14,11 @@ import java.io.IOException;
 @WebServlet(name = "controllers.EditAdServlet", urlPatterns = "/ads/edit")
 
 public class EditAdServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        request.getSession().setAttribute("editAdId", request.getParameter("edit"));
+        request.getRequestDispatcher("/WEB-INF/ads/editAd.jsp").forward(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 
             String id = request.getParameter("id");

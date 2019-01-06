@@ -44,7 +44,10 @@
             <label for="category5">category</label>
             <input id="category5" name="category5" class="form-control" type="text">
         </div>
-        <input type="submit" class="btn btn-block btn-primary">
+
+        <%--Turned input tag to button tag so that we can use value and name. This makes it easier to grab
+        value pairs in the servlet--%>
+        <button type="submit" class="btn btn-block btn-primary" value="${sessionScope.editAdId}" name="adToEdit">Submit Edit</button>
     </form>
 </div>
 </body>
