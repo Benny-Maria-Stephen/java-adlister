@@ -72,11 +72,8 @@ public class MySQLAdsDao implements Ads {
 
             System.out.println(ad.getCategories());
             List<String> categories = ad.getCategories();
-            System.out.println("Categories are going to get added to the list of category ids");
             List<Long> categoryIds = catIds(categories);
-            if(insertCatAdIdPairs(adId, categoryIds)){
-                System.out.println("Pairs inserted into ads_categories!");
-            }
+            insertCatAdIdPairs(adId, categoryIds);
 
             return rs.getLong(1);
         } catch (SQLException e) {

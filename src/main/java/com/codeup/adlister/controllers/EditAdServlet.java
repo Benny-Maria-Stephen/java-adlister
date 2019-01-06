@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "controllers.EditAdServlet", urlPatterns = "/ads/edit")
 
@@ -21,15 +23,23 @@ public class EditAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 
-            String id = request.getParameter("id");
-//            String username = request.getParameter("username");
-//            Long
-//            String email = request.getParameter("email");
-//            String password = request.getParameter("password");
-//            String passwordConfirmation = request.getParameter("confirm_password");
-//            User user = (User) request.getSession().getAttribute("user");
+            long adId = Long.parseLong(request.getParameter("adToEdit"));
+            User user = (User) request.getSession().getAttribute("user");
+            Ad ad = DaoFactory.getAdsDao().search(adId);
+            List<String> categories = new ArrayList<>();
 
-            request.getSession();
+            //checks to make user that is edited was made by the logged in user
+            if(ad.getUserId() == user.getId()){
+
+              for(int i=1; i <= 5; i++){
+                  String category = request.getParameter("category" + i);
+                  if(category != null){
+                      categories.add(category);
+                  }
+              }
+
+
+            }
 
 
             // Is this needed and does it need to be modified

@@ -28,9 +28,9 @@ public class CreateAdServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         List<String> categories = new ArrayList<>();
         for(int i = 1; i <= 5; i++){
-            String value = request.getParameter("category" + i);
-            if(value != null){
-                categories.add(value);
+            String category = request.getParameter("category" + i);
+            if(category != null){
+                categories.add(category);
             }
         }
         Ad ad = new Ad(
