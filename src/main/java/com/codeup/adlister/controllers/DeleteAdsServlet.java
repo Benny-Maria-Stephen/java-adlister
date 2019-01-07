@@ -30,7 +30,7 @@ public class DeleteAdsServlet extends HttpServlet {
         System.out.println(deleted);
 
         //Tells the page to go to the url /ads. Since there is no .jsp at the end we are going through another servlet
-        response.sendRedirect("/ads");
+        response.sendRedirect("/profile");
 //        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
     }
 

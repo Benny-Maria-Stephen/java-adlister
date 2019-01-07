@@ -14,6 +14,7 @@
 <body>
 <%--This page is meant to display the information of one ad--%>
 <%--<h2>${title}</h2>--%>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <h2><c:out value="${title}"/></h2>
 <p><c:out value="${description}"/></p>

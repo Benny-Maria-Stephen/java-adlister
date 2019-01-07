@@ -22,7 +22,7 @@ public interface Ads {
 
     boolean deleteAd(long adId);
 
-    boolean editAd( long adId );
+    boolean editAd(long adId);
 
-    void editAd( Ad ad );
+    void editAd(Ad ad, long adId);
 }
