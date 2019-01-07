@@ -98,7 +98,7 @@ abstract public class ListAdsDao implements Ads {
     }
 
     @Override
-    public void editAd( Ad ad ) {
+    public void editAd( Ad ad, long adId ) {
 
     }
 }

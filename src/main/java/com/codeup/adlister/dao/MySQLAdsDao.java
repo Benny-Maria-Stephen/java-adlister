@@ -259,34 +259,35 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public boolean editAd( long adId ) {
+    public boolean editAd( long adId) {
+
         return false;
     }
 
-    @Override
-    public void editAd( Ad ad ) {
-
-    }
-
-
 //    @Override
 //    public void editAd( Ad ad ) {
-//        String sql = "UPDATE `ads` SET `user_id`=?, `title`= ?, `description`=? where `id`=?";
-//        try {
-//            // prepare statement
-//            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            //set params
-//            stmt.setLong(1, ad.getUserId());
-//            stmt.setString(2, ad.getTitle());
-//            stmt.setString(3, ad.getDescription());
-//            // execute SQL
-//            stmt.executeUpdate();
+//
+//    }
+
+
+    @Override
+    public void editAd( Ad ad , long id) {
+        String sql = "UPDATE `ads` SET `title`= ?, `description`=? where `id`=?";
+        try {
+            // prepare statement
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            //set params
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            // execute SQL
+            stmt.executeUpdate();
 //            ResultSet rs = stmt.getGeneratedKeys();
 //            rs.next();
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error editing ad", e);
-//        }
-//    }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad", e);
+        }
+    }
 
     //This function deletes ads and categories relationships
     private boolean deleteAdsCategories(long adId){

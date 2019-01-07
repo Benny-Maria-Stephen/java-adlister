@@ -42,7 +42,16 @@
                     <tr>
                         <td>${ad.getTitle()}</td>
                         <td>${ad.getDescription()}</td>
-                        <td><button>edit</button><button>delete</button></td>
+                        <td>
+                            <%--changed the method to get because we want to grab information and return it (the editAd.jsp)--%>
+                            <form action="/ads/edit" method="get" >
+                            <button type="submit" class="btn btn-primary btn-block" value="${ad.id}" name="edit">Edit</button>
+                        </form>
+                            <form action="/ads/delete" method="post">
+                                    <%--<input type="submit" class="btn btn-primary btn-block" name="delete" value="Delete">--%>
+                                <button type="submit" class="btn btn-primary btn-block" value="${ad.id}" name="delete">Delete</button>
+                            </form>
+                        </td>
                     </tr>
             </c:forEach>
 
