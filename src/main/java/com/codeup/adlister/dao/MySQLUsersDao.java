@@ -80,9 +80,10 @@ public class MySQLUsersDao implements Users {
             stmt.setString(2, user.getEmail());
             stmt.setLong(3, user.getId());
             // execute SQL
-            stmt.executeUpdate();
+            System.out.print(stmt.executeUpdate());
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
+            System.out.print(rs.next());
         } catch (SQLException e) {
             throw new RuntimeException("Error updating profile", e);
         }

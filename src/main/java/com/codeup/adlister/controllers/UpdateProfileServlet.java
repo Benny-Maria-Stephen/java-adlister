@@ -17,7 +17,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
         User user = (User) request.getSession().getAttribute("user");
-        request.getSession();
+//        request.getSession();
 
         // Is this needed and does it need to be modified
         boolean inputHasErrors = username.isEmpty()
@@ -31,7 +31,10 @@ public class UpdateProfileServlet extends HttpServlet {
         }
 
         // update profile
-        DaoFactory.getUsersDao().updateUser(new User(user.getId(), username, email, password));
+        User updatedUser = new User(user.getId(), username, email, password);
+        DaoFactory.getUsersDao().updateUser(updatedUser);
+        request.getSession().setAttribute("user", updatedUser);
+
         response.sendRedirect("/profile");
 
     }
