@@ -17,7 +17,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
         User user = (User) request.getSession().getAttribute("user");
-//        request.getSession();
+        request.getSession();
 
         // Is this needed and does it need to be modified
         boolean inputHasErrors = username.isEmpty()

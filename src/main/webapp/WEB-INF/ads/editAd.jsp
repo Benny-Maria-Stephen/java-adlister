@@ -13,8 +13,8 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
     <h1>Edit an Ad</h1>
     <form action="/ads/edit" method="post">
