@@ -17,17 +17,31 @@ import java.util.List;
 
 public class EditAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-//        request.getSession().setAttribute("editAdId", request.getParameter("edit"));
         Long editId = Long.parseLong(request.getParameter("edit"));
         Ad ad = DaoFactory.getAdsDao().search(editId);
-        request.getSession().setAttribute("ad", ad);
-        User user = (User) request.getSession().getAttribute("user");
-        if(user != null && ad.getUserId() == user.getId()){
-            request.getRequestDispatcher("/WEB-INF/ads/editAd.jsp").forward(request, response);
 
+        User user = (User) request.getSession().getAttribute("user");
+
+        List<String> allCategories = DaoFactory.getAdsDao().allCategories();
+
+
+//        note for later: make it
+        if(ad.getUserId() == user.getId()){
+            request.getSession().setAttribute("ad", ad);
+
+            for(String category : allCategories){
+                if(ad.getCategories().contains(category)){
+                    System.out.println(category);
+                    request.getSession().setAttribute(category, true);
+                    System.out.println(request.getSession().getAttribute(category));
+                }
+            }
+            request.getSession().setAttribute("categories",allCategories);
+            request.getRequestDispatcher("/WEB-INF/ads/editAd.jsp").forward(request, response);
         }
+
         //placeholder 404 or error message
-        response.sendRedirect("/");
+        response.sendRedirect("/login");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -35,27 +49,26 @@ public class EditAdServlet extends HttpServlet {
             long adId = Long.parseLong(request.getParameter("adToEdit"));
             User user = (User) request.getSession().getAttribute("user");
             Ad ad = DaoFactory.getAdsDao().search(adId);
+            List<String> allCategories = DaoFactory.getAdsDao().allCategories();
             List<String> categories = new ArrayList<>();
 
             //checks to make user that is edited was made by the logged in user
             if(ad.getUserId() == user.getId()){
-              for(int i=1; i <= 5; i++){
-                  String category = request.getParameter("category" + i);
-                  if(category != null){
-                      System.out.println(category);
+              String title = request.getParameter("title");
+              String description = request.getParameter("description");
+              for(String category : allCategories){
+                  if(Boolean.parseBoolean(request.getParameter(category))){
+                      System.out.println(request.getParameter(category));
                       categories.add(category);
                   }
 
-                  String title = request.getParameter("title");
-                  String description = request.getParameter("description");
-                  Ad newAd = new Ad(user.getId(), title, description, categories);
-                  DaoFactory.getAdsDao().editAd(newAd, ad.getId());
 //                  Keep in mind the user may not want to change all the information and so we have populated the form
                   //maybe check if the information in the form is different for any fields on the form
                   //so maybe have different update queries depending on the information given
               }
 
-
+              Ad newAd = new Ad(user.getId(), title, description, categories);
+              DaoFactory.getAdsDao().editAd(newAd, ad.getId());
 
             }
         //Tells the page to go to the url /ads. Since there is no .jsp at the end we are going through another servlet

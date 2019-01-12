@@ -93,11 +93,6 @@ abstract public class ListAdsDao implements Ads {
     }
 
     @Override
-    public boolean editAd( long adId ) {
-        return false;
-    }
-
-    @Override
     public void editAd( Ad ad, long adId ) {
 
     }

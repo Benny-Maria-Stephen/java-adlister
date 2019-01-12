@@ -276,11 +276,11 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    @Override
-    public boolean editAd( long adId) {
-
-        return false;
-    }
+//    @Override
+//    public boolean editAd( long adId) {
+//
+//        return false;
+//    }
 
 
     @Override
@@ -301,6 +301,8 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error editing ad", e);
         }
     }
+
+//    private void editCategoryAds()
 
     //This function deletes ads and categories relationships
     private boolean deleteAdsCategories(long adId){

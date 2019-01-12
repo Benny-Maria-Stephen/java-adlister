@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: fieldsfury
@@ -29,26 +30,17 @@
             </div>
 
             <%--check if that value in the categories array list exists, if it does then set the value else set no value--%>
-            <div class="form-group">
-                <label for="category1">category</label>
-                <input id="category1" name="category1" class="form-control" type="text" value="${ad.categories.get(0)}">
-            </div>
-            <div class="form-group">
-                <label for="category2">category</label>
-                <input id="category2" name="category2" class="form-control" type="text" value="${ad.categories.get(1)}">
-            </div>
-            <div class="form-group">
-                <label for="category3">category</label>
-                <input id="category3" name="category3" class="form-control" type="text" value="${ad.categories.get(2)}">
-            </div>
-            <div class="form-group">
-                <label for="category4">category</label>
-                <input id="category4" name="category4" class="form-control" type="text" value="${ad.categories.get(3)}">
-            </div>
-            <%--<div class="form-group">--%>
-                <%--<label for="category5">category</label>--%>
-                <%--<input id="category5" name="category5" class="form-control" type="text" value="${ad.categories.get(4)}">--%>
-            <%--</div>--%>
+            <c:forEach var="category" items="${categories}">
+                <input type="checkbox" name="${category}" value="true" ><span>${category}</span>
+                <%--<c:choose>--%>
+                    <%--<c:when test="${category}">--%>
+                        <%--<input type="checkbox" name="${category}" value="true" checked><span>${category}</span>--%>
+                    <%--</c:when>--%>
+                    <%--<c:otherwise>--%>
+                        <%--<input type="checkbox" name="${category}" value="true"><span>${category}</span>--%>
+                    <%--</c:otherwise>--%>
+                <%--</c:choose>--%>
+            </c:forEach>
 
     <%--Turned input tag to button tag so that we can use value and name. This makes it easier to grab
         value pairs in the servlet--%>

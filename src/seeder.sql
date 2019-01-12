@@ -6,3 +6,5 @@ insert into ads (user_id, title, description) values (1, 'hello4', 'description4
 
 insert into categories (category) values ('category1') , ('category2'),('category3'), ('category4'), ('category5');
 insert into ads_categories (ad_id, category_id) values (2,1), (2,2);
+
+use adlister_db;
