@@ -30,6 +30,27 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    private List<String> createCategoriesFromResults(ResultSet rs) throws SQLException{
+        List<String> categories = new ArrayList<>();
+        while(rs.next()){
+            categories.add(rs.getString("category"));
+        }
+        return categories;
+    }
+
+    @Override
+    public List<String> allCategories(){
+        PreparedStatement stmt = null;
+        try{
+            stmt = connection.prepareStatement("SELECT * FROM categories");
+            ResultSet rs = stmt.executeQuery();
+            return createCategoriesFromResults(rs);
+
+        }catch(SQLException e){
+            throw new RuntimeException("Error retrieving all categories");
+        }
+    }
+
     @Override
     public List<Ad> all() {
         PreparedStatement stmt = null;
@@ -142,7 +163,6 @@ public class MySQLAdsDao implements Ads {
 
 
     public Long insertCategory(String category) throws SQLException{
-//        try {
             String insertCat = "INSERT INTO categories(category) VALUES (?)";
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(insertCat, Statement.RETURN_GENERATED_KEYS);
@@ -152,9 +172,7 @@ public class MySQLAdsDao implements Ads {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
 
@@ -258,15 +276,10 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    @Override
-    public boolean editAd( long adId) {
-
-        return false;
-    }
-
 //    @Override
-//    public void editAd( Ad ad ) {
+//    public boolean editAd( long adId) {
 //
+//        return false;
 //    }
 
 
@@ -288,6 +301,8 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error editing ad", e);
         }
     }
+
+//    private void editCategoryAds()
 
     //This function deletes ads and categories relationships
     private boolean deleteAdsCategories(long adId){

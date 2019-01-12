@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,26 +21,9 @@
                     <label for="description">Description</label>
                     <textarea id="description" name="description" class="form-control" type="text"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="category1">category</label>
-                    <input id="category1" name="category1" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="category2">category</label>
-                    <input id="category2" name="category2" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="category3">category</label>
-                    <input id="category3" name="category3" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="category4">category</label>
-                    <input id="category4" name="category4" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="category5">category</label>
-                    <input id="category5" name="category5" class="form-control" type="text">
-                </div>
+               <c:forEach var="category" items="${categories}">
+                   <input type="checkbox" name="${category}" value="true"><span>${category}</span>
+               </c:forEach>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
