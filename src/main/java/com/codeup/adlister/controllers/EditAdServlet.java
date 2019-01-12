@@ -42,6 +42,7 @@ public class EditAdServlet extends HttpServlet {
               for(int i=1; i <= 5; i++){
                   String category = request.getParameter("category" + i);
                   if(category != null){
+                      System.out.println(category);
                       categories.add(category);
                   }
 
