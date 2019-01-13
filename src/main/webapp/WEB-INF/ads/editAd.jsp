@@ -22,11 +22,11 @@
         <%--<jsp:include page="/WEB-INF/partials/adForm.jsp"/>--%>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text" value="${ad.title}">
+                <input id="title" name="title" class="form-control" type="text" value="${adToEdit.title}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control" type="text">${ad.description}</textarea>
+                <textarea id="description" name="description" class="form-control" type="text">${adToEdit.description}</textarea>
             </div>
 
             <%--check if that value in the categories array list exists, if it does then set the value else set no value--%>
