@@ -27,7 +27,8 @@ public class EditAdServlet extends HttpServlet {
 
 //        note for later: make it
         if(ad.getUserId() == user.getId()){
-            request.getSession().setAttribute("ad", ad);
+            request.getSession().setAttribute("adToEdit", ad);
+            request.getSession().setAttribute("adToEditID", ad.getUserId());
 
             for(String category : allCategories){
                 if(ad.getCategories().contains(category)){
@@ -46,7 +47,7 @@ public class EditAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 //        has not been tested yet
-            long adId = Long.parseLong(request.getParameter("adToEdit"));
+            long adId = Long.parseLong(request.getParameter("adToEditID"));
             User user = (User) request.getSession().getAttribute("user");
             Ad ad = DaoFactory.getAdsDao().search(adId);
             List<String> allCategories = DaoFactory.getAdsDao().allCategories();
